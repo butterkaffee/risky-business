@@ -3,14 +3,15 @@ import numpy as np
 from numpy import vectorize
 
 
-class poisson(object):
+class Poisson(object):
   
   def __init__(self, lam=None):
     self.lam = lam
+    self.name = "Poisson"
 
   def _pdf(self, k):
     """dont use this directly"""
-    exp(- self.lam) * (lam ** k)/ factorial(k)
+    return exp(- self.lam) * (self.lam ** k)/ factorial(k)
 
 
   def pdf(self, k):
@@ -19,6 +20,9 @@ class poisson(object):
       return vpdf(k)
     else:
       return self._pdf(k)
+
+  def fit(self,X):
+    self.lam = np.mean(X)
 
 
 # exponential distribution
